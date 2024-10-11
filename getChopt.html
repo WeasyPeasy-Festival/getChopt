@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chOpt</title>
+    <style>
+        input{
+            margin-right: 1vw;
+        }
+        #songForm{
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+        #instrumentForm{
+            grid-column-start: 1;
+        }
+        #difficultyForm{
+            grid-column-start: 2;
+        }
+        #squeezeForm{
+            grid-column-start: 3;
+        }
+        #forms{
+            display: grid;
+            grid-template-columns: 3;
+            grid-template-rows: 2;
+            flex-direction: row;
+            border: 0.1rem black solid;
+            width: fit-content;
+            padding: 0.5rem;
+        }
+        #instrumentForm, #difficultyForm{
+            margin-right: 5vw;
+        }
+        button{
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        .label  {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        #getChopt{
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body >
+    <a target="_blank" href="https://www.gmscorner.dev/fortnite/expert/guitar" id="linkGms">Link to official gmscorner website</a>
+    <br> <br>
+    
+    <div id="forms">
+        <div id="songForm">
+            <label for="songInput">Song: </label>
+            <input type="text" id="songInput" onkeydown="handleKeyPress(event)">
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <div id="instrumentForm">
+            <label for="instruInput" class="label">Instrument</label>
+            <div id="instruInput">
+                <input type="radio" name="instrument" value="guitar" checked="checked">
+                <label for="guitar">Lead</label>
+                <br>
+                <input type="radio" name="instrument" value="bass">
+                <label for="bass">Bass</label>
+                <br>
+                <input type="radio" name="instrument" value="drums">
+                <label for="drums">Drums</label>
+                <br>
+                <input type="radio" name="instrument" value="vocals">
+                <label for="vocals">Vocals</label>
+                <br>
+                <input type="radio" name="instrument" value="proguitar">
+                <label for="prolead">Pro Lead</label>
+                <br>
+                <input type="radio" name="instrument" value="probass">
+                <label for="probass">Pro Bass</label>
+            </div>
+        </div>
+
+        <div id="difficultyForm">
+            <label for="diffInput" class="label">Difficulty</label>
+            <div id="diffInput">
+                <input type="radio" name="diff" value="expert" checked="checked">
+                <label for="expert">Expert (X)</label>
+                <br>
+                <input type="radio" name="diff" value="hard">
+                <label for="hard">Hard (H)</label>
+                <br>
+                <input type="radio" name="diff" value="medium">
+                <label for="hard">Medium (M)</label>
+                <br>
+                <input type="radio" name="diff" value="easy">
+                <label for="easy">Easy (E)</label>
+            </div>
+        </div>
+    
+        <div id="squeezeForm">
+            <label for="squeezePerc" class="label">Squeeze Percent</label>
+            
+            <div id="squeezePerc">
+                <input type="radio" name="squeeze" value="0" checked="checked">
+                <label for="0">0%</label>
+                <br>
+                <input type="radio" name="squeeze" value="20">
+                <label for="20">20%</label>
+                <br>
+                <input type="radio" name="squeeze" value="40">
+                <label for="40">40%</label>
+                <br>
+                <input type="radio" name="squeeze" value="60">
+                <label for="60">60%</label>
+                <br>
+                <input type="radio" name="squeeze" value="80">
+                <label for="80">80%</label>
+                <br>
+                <input type="radio" name="squeeze" value="100">
+                <label for="100">100%</label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button onclick="GetChopt()" id="getChopt">Get Chopt</button>
+    <button onclick="Help()">help</button>
+    <script>
+        function GetChopt(){
+            let baseWebsite = "https://media.gmscorner.dev/fortnite/";
+            let difficulty = getVar("diff");
+            let instrument = getVar("instrument");
+            let squeeze = getVar('squeeze');
+            let songname = document.getElementById("songInput").value;
+            if(songname == ""){
+                alert("Songname can't be empty!")
+                return;
+            }
+            let linkWebsite = baseWebsite + difficulty + "/" + instrument + "/" + songname + "." + squeeze + ".png" 
+            window.open(linkWebsite); 
+        }
+        function getVar(searchQuery){
+            var radios = document.getElementsByName(searchQuery);
+            console.log(radios);
+            let variable = "";
+            for (var i = 0, length = radios.length; i < length; i++) {
+              if (radios[i].checked) {
+                variable = radios[i].value;
+                break;
+              }
+            }
+            return variable;
+        }
+        function Help(){
+            alert("Hello fellow gamer!\nThis is a website to find your correct overdrive paths for Fortnite Festival songs!\nPlease type the full song in lowercase letters and without spaces or special characters! Then select your instrument, difficulty and squeeze percent!\nWrong inputs will not give any valid results (beware that some songs do not need to be typed fully)!\nYou might also need to allow pop-ups in order to get the paths!\nFor more information on how to spell songs (e.g: numbers) visit the 'gmscorner fortnite paths' website! <3")
+        }
+        function handleKeyPress(e){
+            var key=e.keyCode;
+            if (key==13){
+                document.getElementById("getChopt").click();
+            }
+        }
+    </script>
+</body>
+</html>
