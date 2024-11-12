@@ -10,6 +10,8 @@ function GetChopt(){
         alert("Songname can't be empty!")
         return;
     }
+    songname = songname.toLowerCase();
+    songname = songname.replace(/ /g,"");
     let linkWebsite = baseWebsite + difficulty + "/" + instrument + "/" + songname + "." + squeeze + ".png" 
 
     window.open(linkWebsite); 
